@@ -81,8 +81,7 @@ def checkHorizontal(board):
             return X
         elif board[i][0] == O and board[i][1] == O and board[i][2] == O:
             return O
-        else:
-            return None
+    return None
 
 def checkVertical(board):
     for i in range(3):
@@ -90,8 +89,7 @@ def checkVertical(board):
             return X
         elif board[0][i] == O and board[1][i] == O and board[2][i] == O:
             return O
-        else:
-            return None
+    return None
 
 def checkDiagonal(board):
     if board[0][0] == X and board[1][1] == X and board[2][2] == X:
@@ -104,6 +102,7 @@ def checkDiagonal(board):
         return O
     else:
         return None
+        
 def isDraw(board):
     countNone = 0
     for i in range(3):
@@ -143,16 +142,15 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    result = None
-    value = None
     if terminal(board):
         return None
-    elif player(board) == X:
-        value, result = maximize(board)
-        return result
-    elif player(board) == O:
-        value, result == minimize(board)
-        return result
+    else:
+        if player(board) == X:
+            value, r = maximize(board)
+            return r
+        else:
+            value, r = minimize(board)
+            return r
 
 def maximize(board):
     if terminal(board):
@@ -182,23 +180,6 @@ def minimize(board):
                 return v, move
     return v, move
 
-    """
-    if terminal(board):
-        return utility(board), None
-
-    v = float('inf')
-    move = None
-    for action in actions(board):
-        # v = max(v, min_value(result(board, action)))
-        aux, act = max_value(result(board, action))
-        if aux < v:
-            v = aux
-            move = action
-            if v == -1:
-                return v, move
-
-    return v, move
-    """
 
 
 
